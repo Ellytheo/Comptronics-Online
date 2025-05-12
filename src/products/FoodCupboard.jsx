@@ -86,7 +86,7 @@ const FoodCupboard = () => {
 
   return (
     <div className="container-fluid">
-      <h1>Explore Products</h1>
+     
 
       {/* Carousel */}
       <div className="w-full max-w-3xl mx-auto mb-4">
