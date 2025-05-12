@@ -1,12 +1,11 @@
 import axios from "axios";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { CartContext } from "../CartContext";
 
 const Purchase = () => {
-  const { cartItems } = useContext(CartContext);
   const navigate = useNavigate();
 
+  const [cartItems, setCartItems] = useState([]);
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState("");
   const [success, setSuccess] = useState("");
@@ -18,13 +17,26 @@ const Purchase = () => {
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
+
+    // Load cart items from localStorage
+    const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
+    setCartItems(storedCart);
   }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Basic phone number validation
+    const phoneRegex = /^254\d{9}$/;
+    if (!phoneRegex.test(phone)) {
+      setError("Please enter a valid phone number in the format 254********.");
+      return;
+    }
+
     setLoading("Processing payment...");
 
     try {
+      // Calculate total price
       const totalAmount = cartItems.reduce(
         (acc, item) => acc + item.price * item.quantity,
         0
@@ -43,6 +55,10 @@ const Purchase = () => {
       setSuccess(response.data.message);
       setError("");
 
+      // Clear cart after successful payment
+      localStorage.removeItem("cart");
+
+      // Redirect after successful payment
       setTimeout(() => {
         navigate("/profile");
       }, 2000);
@@ -51,6 +67,24 @@ const Purchase = () => {
       setSuccess("");
       setError(error.response?.data?.message || "Payment failed. Try again.");
     }
+  };
+
+  // Remove item from cart
+  const removeFromCart = (productId) => {
+    const updatedCart = cartItems.filter((item) => item.product_id !== productId);
+    setCartItems(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
+  };
+
+  // Update quantity in cart
+  const updateQuantity = (productId, quantity) => {
+    const updatedCart = cartItems.map((item) =>
+      item.product_id === productId
+        ? { ...item, quantity: quantity }
+        : item
+    );
+    setCartItems(updatedCart);
+    localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
   return (
@@ -80,9 +114,27 @@ const Purchase = () => {
                 className="d-flex justify-content-between mb-2"
               >
                 <span>
-                  {item.name} x {item.quantity}
+                  {item.name} x{" "}
+                  <input
+                    type="number"
+                    value={item.quantity}
+                    onChange={(e) =>
+                      updateQuantity(item.product_id, parseInt(e.target.value))
+                    }
+                    min="1"
+                    className="form-control d-inline-block w-auto"
+                    style={{ width: "50px" }}
+                  />
                 </span>
-                <span>Ksh {item.price * item.quantity}</span>
+                <span>
+                  Ksh {item.price * item.quantity}
+                  <button
+                    className="btn btn-danger btn-sm ml-2"
+                    onClick={() => removeFromCart(item.product_id)}
+                  >
+                    Remove
+                  </button>
+                </span>
               </div>
             ))
           )}
