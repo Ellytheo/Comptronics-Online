@@ -97,7 +97,7 @@ const Promos = () => {
 
   return (
     <div className="container-fluid row">
-      <h1>Explore Promo & Category Products</h1>
+     
 
   {/* Carousel */}
   <div className="w-full max-w-3xl mx-auto mb-4">
