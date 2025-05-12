@@ -1,0 +1,441 @@
+/* General App Styling */
+.App {
+  text-align: center;
+}
+
+.signin {
+  padding-top: 100px;
+}
+
+.getit {
+  padding-top: 100px;
+}
+
+/* Entire top section fixed */
+.fixed-top-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1050;
+  background-color: white;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Push main content down */
+.top-padding {
+  padding-top: 170px;
+  transition: padding-top 0.3s ease-in-out;
+}
+
+/* Header Layout */
+.App-header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 20px;
+  font-weight: bold;
+  text-align: start;
+  overflow: visible;
+}
+
+/* General App Styling */
+.app {
+  text-align: start;
+  font-size: calc(4px + 2vmin);
+}
+
+form {
+  margin: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  align-items: center;
+  background-color: #4d89ce;
+  margin: 10px;
+  color: red;
+  padding: 10px;
+  border: solid 2px;
+  text-decoration: none;
+  border-radius: 50px;
+}
+
+nav {
+  text-align: right;
+  padding: 5px;
+  background-color: white;
+  margin-left: 20px;
+}
+
+.nav4 {
+  text-align: right;
+  color: red;
+  margin: 10px;
+  padding: 10px;
+  border: solid 2px;
+  text-decoration: none;
+  border-radius: 50px;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.aboutus {
+  text-align: start;
+}
+
+.App-footer {
+  object-fit: cover;
+  background-color: #150236;
+  min-height: 20vh;
+  box-shadow: inset 0 -3em 3em rgb(0 200 0 / 50%), 0 0 0 2px white,
+    0.3em 0.3em 1em rgb(200 0 0 / 80%);
+  border-radius: solid 2px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: left;
+  font-size: calc(10px + 2vmin);
+  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(223, 18, 29);
+}
+
+/* Adjust icon container layout */
+.icon-box {
+  width: auto;
+  height: auto;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-hover {
+  color: #0d6efd;
+  transition: color 0.3s ease;
+  padding: 12px;
+  border-radius: 50%;
+  font-size: 2rem;
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.icon-hover:hover {
+  color: green;
+  background-color: rgba(0, 128, 0, 0.1);
+}
+
+.text-center {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+.mb-1 {
+  margin-bottom: 0 !important;
+}
+
+.mt-1 {
+  margin-top: 0 !important;
+}
+
+.text-muted {
+  font-size: 0.85rem;
+}
+
+.w-100 {
+  width: 100%;
+}
+
+.gap-3 {
+  gap: 16px;
+}
+
+/* Media Query for Responsiveness */
+@media (max-width: 768px) {
+  .icon-box {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+  .icon-hover {
+    font-size: 1.5rem;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 576px) {
+  .icon-box {
+    width: 2rem;
+    height: 2rem;
+  }
+  .icon-hover {
+    font-size: 1.2rem;
+    padding: 6px;
+  }
+}
+
+/* Card Hover Effect */
+.card {
+  transition: transform 0.8s ease, box-shadow 0.8s ease;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 10px 20px black;
+}
+
+.card img {
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  transform: scale(1.05);
+}
+
+/* Dropdown Menu Custom Styling */
+.dropdown-container {
+  position: relative;
+  display: inline-block;
+  background-color: transparent;
+  padding: 8px;
+  color: #0d6efd;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+}
+
+.dropdown-menu-custom {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 1000;
+  min-width: 180px;
+  text-align: left;
+}
+
+/* Adjust sidebar popup to align with the top of the dropdown */
+.sidebar-popup {
+  position: absolute;
+  top: 0; /* Aligns with the top of the dropdown */
+  left: 100%; /* Moves the popup to the right of the dropdown */
+  margin-left: 3px; /* Optional: adds space between dropdown and popup */
+  width: 200px;
+  height: 450px;
+  background: #fafafc;
+  border: 1px solid #c7bcbc;
+  padding: 10px;
+  z-index: 1010;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+}
+
+/* Sidebar Popup Link Styling */
+.sidebar-popup a {
+  display: block;
+  padding: 8px 12px;
+  margin-bottom: 6px;
+  background-color: #ddd8d8;
+  border-radius: 6px;
+  color: #333;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.sidebar-popup a:hover {
+  background-color: #e0e0e0;
+  color: #1e07e7;
+}
+
+/* Dropdown Link */
+.dropdown-link {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+  padding: 4px 8px;
+}
+
+.dropdown-link:hover {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.text-gold {
+  color: #03772a;
+}
+
+.dropdown-category-link {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #e6e0e0;
+  border-radius: 6px;
+  color: #020202;
+  text-decoration: none;
+  margin-bottom: 5px;
+  transition: background-color 0.2s ease;
+}
+
+.dropdown-category-link:hover {
+  background-color: #ebe4e4;
+  color: #1422e0;
+}
+
+/* Scrollable product container */
+.product-container {
+  display: flex;
+  overflow-x: scroll;
+  gap: 20px;
+  padding: 10px;
+}
+
+.product-card {
+  flex-shrink: 0;
+  width: 200px;
+  margin-bottom: 20px;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+/* Keyframe for Logo Spin */
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.sub-category-info {
+  margin-top: 5px;
+  padding-left: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.sub-category-info ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.sub-category-info ul li {
+  padding: 5px 0;
+  font-size: 14px;
+  color: #555;
+}
+.carousel{
+  background-color: #024918e0;
+}
+
+/* Chatbot container - initially hidden */
+.chatbot-container {
+  position: fixed;
+  top: 260px; /* Position chatbot lower at the bottom of the screen */
+  left: 20px; /* Position the chatbot at the left */
+  width: 350px;
+  background: #03863e;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+  transition: transform 0.3s ease-in-out; /* Smooth transition */
+  max-height: 80vh; /* Prevents it from taking up too much vertical space */
+  overflow-y: auto; /* Allows scrolling if content exceeds max height */
+}
+
+/* Chat icon styles */
+.chat-icon {
+  position: fixed;
+  top: 200px; /* Position the icon at the bottom */
+  left: 20px;
+  width: 60px;
+  height: 60px;
+  background-color: #028f2c;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  cursor: pointer;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 10000; /* Ensures it's on top of other elements */
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.chat-icon:hover {
+  background-color: #2e8b08;
+  transform: scale(1.1); /* Slightly increase size on hover */
+}
+
+/* Chatbox styles */
+.chatbox {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  max-width: 80%;
+}
+
+.message.user {
+  align-self: flex-end;
+  background-color: #007bff;
+  color: white;
+}
+
+.message.bot {
+  align-self: flex-start;
+  background-color: #f1f1f1;
+}
+
+.input-form {
+  display: flex;
+  padding: 10px;
+  border-top: 1px solid #ddd;
+}
+
+.input-form input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.input-form button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-left: 10px;
+}
