@@ -128,7 +128,7 @@ const SignIn = () => {
               className="btn btn-outline-secondary"
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? "🙈" : " 👀"}
+              {showPassword ? "👀" : "🙈" }
             </button>
           </div>
 
