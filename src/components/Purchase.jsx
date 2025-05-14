@@ -60,7 +60,7 @@ const Purchase = () => {
 
       // Redirect after successful payment
       setTimeout(() => {
-        navigate("/profile");
+        navigate("profile/:id");
       }, 2000);
     } catch (error) {
       setLoading("");
@@ -80,6 +80,7 @@ const Purchase = () => {
   const updateQuantity = (productId, quantity) => {
     const updatedCart = cartItems.map((item) =>
       item.product_id === productId
+    
         ? { ...item, quantity: quantity }
         : item
     );
