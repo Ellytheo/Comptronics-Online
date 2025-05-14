@@ -18,7 +18,6 @@ const Purchase = () => {
       setUser(JSON.parse(storedUser));
     }
 
-    // Load cart items from localStorage
     const storedCart = JSON.parse(localStorage.getItem("cart")) || [];
     setCartItems(storedCart);
   }, []);
@@ -26,7 +25,6 @@ const Purchase = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Basic phone number validation
     const phoneRegex = /^254\d{9}$/;
     if (!phoneRegex.test(phone)) {
       setError("Please enter a valid phone number in the format 254********.");
@@ -36,7 +34,6 @@ const Purchase = () => {
     setLoading("Processing payment...");
 
     try {
-      // Calculate total price
       const totalAmount = cartItems.reduce(
         (acc, item) => acc + item.price * item.quantity,
         0
@@ -55,12 +52,17 @@ const Purchase = () => {
       setSuccess(response.data.message);
       setError("");
 
-      // Clear cart after successful payment
-      localStorage.removeItem("cart");
+      // Mark all items as purchased
+      const updatedCart = cartItems.map((item) => ({
+        ...item,
+        purchased: true,
+      }));
 
-      // Redirect after successful payment
+      // Save updated cart
+      localStorage.setItem("cart", JSON.stringify(updatedCart));
+
       setTimeout(() => {
-        navigate(`/profile/${user?.id}`);
+        navigate(`/profile/${user.id}`);
       }, 2000);
     } catch (error) {
       setLoading("");
@@ -69,20 +71,15 @@ const Purchase = () => {
     }
   };
 
-  // Remove item from cart
   const removeFromCart = (productId) => {
     const updatedCart = cartItems.filter((item) => item.product_id !== productId);
     setCartItems(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
 
-  // Update quantity in cart
   const updateQuantity = (productId, quantity) => {
     const updatedCart = cartItems.map((item) =>
-      item.product_id === productId
-
-        ? { ...item, quantity: quantity }
-        : item
+      item.product_id === productId ? { ...item, quantity: quantity } : item
     );
     setCartItems(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
@@ -104,7 +101,6 @@ const Purchase = () => {
         {success && <p className="text-success">{success}</p>}
         {error && <p className="text-danger">{error}</p>}
 
-        {/* Cart items list */}
         <div className="cart-items-list">
           {cartItems.length === 0 ? (
             <p>Your cart is empty.</p>
@@ -149,7 +145,6 @@ const Purchase = () => {
           )}
         </h4>
 
-        {/* Phone number input */}
         {user && (
           <form onSubmit={handleSubmit}>
             <input

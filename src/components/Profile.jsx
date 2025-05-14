@@ -17,7 +17,7 @@ const Profile = () => {
     }
 
     try {
-      setUser(JSON.parse(storedUser)); // Parsing user from localStorage
+      setUser(JSON.parse(storedUser));
     } catch (e) {
       console.error("Invalid user data", e);
       navigate("/signin");
@@ -39,9 +39,7 @@ const Profile = () => {
   }, [cartItems]);
 
   const totalPrice = cartItems.reduce((acc, item) => {
-    const cost = item.price || 0;
-    const quantity = item.quantity || 1;
-    return !item.purchased ? acc + cost * quantity : acc;
+    return !item.purchased ? acc + (item.price || 0) * (item.quantity || 1) : acc;
   }, 0);
 
   const handleLogout = () => {
@@ -57,12 +55,11 @@ const Profile = () => {
   };
 
   const handlePurchase = () => {
-    const updatedCart = cartItems.map((item) =>
-      !item.purchased ? { ...item, purchased: true } : item
-    );
-    setCartItems(updatedCart);
     navigate("/purchase");
   };
+
+  const purchasedItems = cartItems.filter(item => item.purchased);
+  const unpurchasedItems = cartItems.filter(item => !item.purchased);
 
   if (loading) {
     return (
@@ -80,10 +77,10 @@ const Profile = () => {
         {/* Cart Section */}
         <div className="col-md-6">
           <h2>🛒 Your Cart</h2>
-          {cartItems.length === 0 ? (
+          {unpurchasedItems.length === 0 ? (
             <p>Your cart is empty.</p>
           ) : (
-            cartItems.map((item) => (
+            unpurchasedItems.map((item) => (
               <div key={item.unique_key} className="card mb-3 shadow-sm">
                 <div className="card-body">
                   <h5 className="card-title">{item.name}</h5>
@@ -91,19 +88,12 @@ const Profile = () => {
                   <p className="card-text fw-bold text-success">
                     Ksh {item.price} x {item.quantity} = Ksh {item.price * item.quantity}
                   </p>
-
-                  {item.purchased ? (
-                    <span className="badge bg-success">
-                      ✔ Bought - Wait for delivery
-                    </span>
-                  ) : (
-                    <button
-                      className="btn btn-danger"
-                      onClick={() => handleRemoveFromCart(item.unique_key)}
-                    >
-                      Remove from Cart
-                    </button>
-                  )}
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleRemoveFromCart(item.unique_key)}
+                  >
+                    Remove from Cart
+                  </button>
                 </div>
               </div>
             ))
@@ -117,6 +107,29 @@ const Profile = () => {
               </button>
             </div>
           )}
+
+          {/* Purchased Items Section */}
+          <div className="mt-5">
+            <h2>📦 Purchased Items</h2>
+            {purchasedItems.length === 0 ? (
+              <p>No purchases yet.</p>
+            ) : (
+              purchasedItems.map((item, index) => (
+                <div key={`${item.unique_key}_${index}`} className="card mb-3 shadow-sm">
+                  <div className="card-body">
+                    <h5 className="card-title">{item.name}</h5>
+                    <p className="card-text">Ksh {item.price}</p>
+                    <p className="card-text fw-bold text-success">
+                      Ksh {item.price} x {item.quantity} = Ksh {item.price * item.quantity}
+                    </p>
+                    <span className="badge bg-success">
+                      ✔ Bought – Wait for Delivery
+                    </span>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
         </div>
 
         {/* Profile Section */}
@@ -126,7 +139,6 @@ const Profile = () => {
             <div className="card p-4 shadow mt-4">
               <p><strong>Username:</strong> {user.username || "N/A"}</p>
               <p><strong>Email:</strong> {user.email || "N/A"}</p>
-              {/* Removed phone info */}
               <button className="btn btn-danger mt-3" onClick={handleLogout}>
                 Log Out
               </button>
